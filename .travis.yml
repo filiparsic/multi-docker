@@ -1,0 +1,17 @@
+sudo: required
+services:
+    - docker
+
+before install
+    - docker build -t filiparsic/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run filiparsic/react-test npm test -- --coverage
+
+after_success:
+    - docker build -t filiparsic/multi-client ./client
+    - docker build -t filiparsic/multi-nginx ./nginx
+    - docker build -t filiparsic/multi-server ./server
+    - docker build -t filiparsic/multi-worker ./worker
+
+
