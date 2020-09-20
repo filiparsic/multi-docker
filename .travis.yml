@@ -14,4 +14,9 @@ after_success:
     - docker build -t filiparsic/multi-server ./server
     - docker build -t filiparsic/multi-worker ./worker
 
+- echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
 
+- docker push filiparsic/multi-client
+- docker push filiparsic/multi-nginx
+- docker push filiparsic/multi-server
+- docker push filiparsic/multi-worker
