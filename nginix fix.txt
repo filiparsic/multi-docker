@@ -1,4 +1,0 @@
-nginx:
-    depends_on:
-      - api
-      - client
